@@ -6,21 +6,22 @@ import com.example.domain.auth.service.AuthService;
 import com.example.domain.member.entity.Member;
 import com.example.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
 public class AuthController {
 
     private final MemberRepository memberRepository;
     private final AuthService authService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/signIn/{email}/{pwd}/{role}")
     public Member signIn(@PathVariable String email, @PathVariable String pwd, @PathVariable String role) {
         Member member = Member.builder()
                 .email(email)
-                .pwd(pwd)
+                .pwd(passwordEncoder.encode(pwd))
                 .role(role).build();
         return memberRepository.save(member);
     }

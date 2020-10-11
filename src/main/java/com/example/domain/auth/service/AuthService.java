@@ -6,7 +6,7 @@ import com.example.domain.auth.request.LogInRequest;
 import com.example.domain.auth.response.LogInResponse;
 import com.example.domain.member.entity.Member;
 import com.example.domain.member.repository.MemberRepository;
-import com.example.global.jwt.JwtService;
+import com.example.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

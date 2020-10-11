@@ -1,6 +1,8 @@
-package com.example.global.jwt;
+package com.example.global.jwt.service;
 
 import com.example.domain.member.entity.Member;
+import com.example.global.jwt.exception.TokenHasExpiredException;
+import com.example.global.jwt.exception.TokenInsInvalidException;
 import com.example.global.security.UserDetailServiceImpl;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -82,8 +84,17 @@ public class JwtService {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
+        } catch (MalformedJwtException e) {
+            throw new TokenInsInvalidException();
+        } catch (ExpiredJwtException e) {
+            throw new TokenHasExpiredException();
+        } catch (UnsupportedJwtException e) {
+            throw new TokenInsInvalidException();
+        } catch (IllegalArgumentException e) {
+            throw new TokenInsInvalidException();
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
+            throw new TokenInsInvalidException();
         }
     }
 

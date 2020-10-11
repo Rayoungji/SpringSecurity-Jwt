@@ -1,6 +1,6 @@
 package com.example.global.filter;
 
-import com.example.global.jwt.JwtService;
+import com.example.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

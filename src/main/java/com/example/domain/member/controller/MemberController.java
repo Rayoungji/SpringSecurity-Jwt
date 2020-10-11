@@ -1,7 +1,7 @@
 package com.example.domain.member.controller;
 
 
-import com.example.global.jwt.JwtService;
+import com.example.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
