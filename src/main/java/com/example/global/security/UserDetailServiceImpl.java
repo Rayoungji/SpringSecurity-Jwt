@@ -1,7 +1,7 @@
 package com.example.global.security;
 
 import com.example.domain.member.entity.Member;
-import com.example.domain.member.exception.MemberNotFoundException;
+import com.example.domain.auth.exception.MemberNotFoundException;
 import com.example.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;

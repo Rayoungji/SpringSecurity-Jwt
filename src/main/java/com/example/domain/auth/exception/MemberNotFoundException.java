@@ -1,4 +1,4 @@
-package com.example.domain.member.exception;
+package com.example.domain.auth.exception;
 
 import com.example.global.exception.NotFoundException;
 

@@ -1,11 +1,11 @@
-package com.example.domain.member.request;
+package com.example.domain.auth.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SignInRequest {
+public class LogInRequest {
     private String email;
     private String pwd;
 }

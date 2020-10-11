@@ -1,6 +1,6 @@
 package com.example.global.filter;
 
-import com.example.global.jwt.JwtProvider;
+import com.example.global.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,13 +16,13 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
-    private final JwtProvider jwtProvider;
+    private final JwtService jwtService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String token = jwtProvider.resolveToken((HttpServletRequest) request);
-        if(token != null && jwtProvider.validateToken(token)){
-            Authentication auth = jwtProvider.getAuthentication(token);
+        String token = jwtService.resolveAccessToken((HttpServletRequest) request);
+        if(token != null && jwtService.validateToken(token)){
+            Authentication auth = jwtService.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
         chain.doFilter(request,response);
