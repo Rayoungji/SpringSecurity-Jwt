@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
                 and().
                 authorizeRequests().
-                antMatchers("/logIn/**","/signIn/**","/intro/**","/accessToken/**").permitAll().
+                antMatchers("/logIn/**","/signIn/**","/intro/**","/accessToken/**","/docs/api-guide.html/**").permitAll().
                 and().
                 authorizeRequests().
                 antMatchers("/admin/**").hasRole("ADMIN").
