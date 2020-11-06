@@ -6,6 +6,7 @@ import com.example.domain.auth.service.AuthService;
 import com.example.domain.member.entity.Member;
 import com.example.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/signIn/{email}/{pwd}/{role}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Member signIn(@PathVariable String email, @PathVariable String pwd, @PathVariable String role) {
         Member member = Member.builder()
                 .email(email)

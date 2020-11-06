@@ -1,0 +1,9 @@
+= 회원가입
+
+== 회원가입 조회
+
+include::{snippets}/signIn/curl-request.adoc[]
+include::{snippets}/signIn/http-request.adoc[]
+include::{snippets}/signIn/http-response.adoc[]
+include::{snippets}/signIn/httpie-request.adoc[]
+

@@ -1,16 +1,19 @@
 buildscript {
     ext {
         jwtVersion = '0.10.5'
+        snippetsDir = "${buildDir}/generated-snippets"
     }
 }
 plugins {
     id 'org.springframework.boot' version '2.3.4.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
+    id "org.asciidoctor.convert" version "1.5.3"
+
 }
 
 group = 'com.example'
-version = '0.0.2-SNAPSHOT'
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -20,6 +23,7 @@ configurations {
 }
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -36,7 +40,25 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     runtimeOnly 'com.h2database:h2'
     compile "org.springframework.boot:spring-boot-starter-data-redis"
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'  //to use restdoc
+    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.4.RELEASE'  //to use restdoc
 }
+
 test {
+    outputs.dir snippetsDir
     useJUnitPlatform()
+}
+
+// ==============restDoc ===================
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}/html5/") {
+        into 'static/docs'
+    }
 }
